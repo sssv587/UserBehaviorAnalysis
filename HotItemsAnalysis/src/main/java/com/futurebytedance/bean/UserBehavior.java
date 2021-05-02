@@ -4,7 +4,7 @@ package com.futurebytedance.bean;
  * @author yuhang.sun
  * @version 1.0
  * @date 2021/5/2 - 18:37
- * @Description POJO类
+ * @Description POJO类定义
  */
 public class UserBehavior {
     // 定义私有属性
