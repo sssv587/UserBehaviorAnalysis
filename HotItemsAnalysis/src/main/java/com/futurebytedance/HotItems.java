@@ -6,6 +6,7 @@ import org.apache.commons.compress.utils.Lists;
 import org.apache.flink.api.common.functions.AggregateFunction;
 import org.apache.flink.api.common.functions.FilterFunction;
 import org.apache.flink.api.common.functions.MapFunction;
+import org.apache.flink.api.common.serialization.SimpleStringSchema;
 import org.apache.flink.api.common.state.ListState;
 import org.apache.flink.api.common.state.ListStateDescriptor;
 import org.apache.flink.api.java.tuple.Tuple;
@@ -19,10 +20,12 @@ import org.apache.flink.streaming.api.functions.timestamps.AscendingTimestampExt
 import org.apache.flink.streaming.api.functions.windowing.WindowFunction;
 import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
+import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer;
 import org.apache.flink.util.Collector;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Properties;
 
 /**
  * @author yuhang.sun
@@ -38,7 +41,20 @@ public class HotItems {
         env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
 
         // 2.读取数据，创建DataStream
-        DataStreamSource<String> inputStream = env.readTextFile("C:\\Users\\10926\\IdeaProjects\\UserBehaviorAnalysis\\HotItemsAnalysis\\src\\main\\resources\\UserBehavior.csv");
+        // DataStreamSource<String> inputStream = env.readTextFile("C:\\Users\\10926\\IdeaProjects\\UserBehaviorAnalysis\\HotItemsAnalysis\\src\\main\\resources\\UserBehavior.csv");
+        Properties properties = new Properties();
+        properties.setProperty("bootstrap.servers", "localhost:9092");
+        properties.setProperty("group.id", "consumer-group");
+        properties.setProperty("key.deserializer",
+                "org.apache.kafka.common.serialization.StringDeserializer");
+        properties.setProperty("value.deserializer",
+                "org.apache.kafka.common.serialization.StringDeserializer");
+        properties.setProperty("auto.offset.reset", "latest");
+
+
+        DataStream<String> inputStream = env.addSource(new FlinkKafkaConsumer<>(
+                "hotitems", new SimpleStringSchema(), properties));
+
 
         // 3.转换为POJO，分配时间戳和watermark
         DataStream<UserBehavior> dataStream = inputStream
