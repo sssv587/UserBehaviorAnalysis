@@ -1,7 +1,7 @@
-package com.futurebytedance;
+package com.futurebytedance.hotitems;
 
-import com.futurebytedance.bean.ItemViewCount;
-import com.futurebytedance.bean.UserBehavior;
+import com.futurebytedance.hotitems.bean.ItemViewCount;
+import com.futurebytedance.hotitems.bean.UserBehavior;
 import org.apache.commons.compress.utils.Lists;
 import org.apache.flink.api.common.functions.AggregateFunction;
 import org.apache.flink.api.common.functions.FilterFunction;
@@ -13,7 +13,6 @@ import org.apache.flink.api.java.tuple.Tuple;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.TimeCharacteristic;
 import org.apache.flink.streaming.api.datastream.DataStream;
-import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.KeyedProcessFunction;
 import org.apache.flink.streaming.api.functions.timestamps.AscendingTimestampExtractor;
