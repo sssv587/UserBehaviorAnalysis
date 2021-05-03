@@ -1,4 +1,4 @@
-package com.futurebytedance.bean;
+package com.futurebytedance.hotitems.bean;
 
 /**
  * @author yuhang.sun
