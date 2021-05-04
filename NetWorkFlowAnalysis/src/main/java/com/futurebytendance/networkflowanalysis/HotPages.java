@@ -147,7 +147,7 @@ public class HotPages {
 //            pageViewCountListState.add(value);
             pageViewCountMapState.put(value.getUrl(), value.getCount());
             ctx.timerService().registerEventTimeTimer(value.getWindowEnd() + 1);
-            // 注册一个一分钟之后的定时器，用来情况状态
+            // 注册一个一分钟之后的定时器，用来清空状态
             ctx.timerService().registerEventTimeTimer(value.getWindowEnd() + 60 * 1000);
         }
 
