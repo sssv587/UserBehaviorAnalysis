@@ -4,7 +4,7 @@ package com.futurebytedance.loginfail.beans;
  * @author yuhang.sun
  * @version 1.0
  * @date 2021/5/5 - 21:23
- * @Description LoginEvent
+ * @Description JavaBean-LoginEvent
  */
 public class LoginEvent {
     private Long userId;
