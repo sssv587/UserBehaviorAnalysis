@@ -98,7 +98,7 @@ public class TxPayMatch {
                 receiptState.clear();
             } else {
                 // 如果receipt没来，注册定时器开始等待
-                ctx.timerService().registerEventTimeTimer((pay.getTimestamp() + 5) * 1000); // 等待5秒钟，具体要看数据
+                ctx.timerService().registerEventTimeTimer((pay.getTimestamp() + 3) * 1000); // 等待5秒钟，具体要看数据
                 // 更新状态
                 payState.update(pay);
             }
